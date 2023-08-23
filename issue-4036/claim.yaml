@@ -1,0 +1,9 @@
+apiVersion: nop.example.org/v1alpha1
+kind: NopResource
+metadata:
+  namespace: default
+  name: apiextensions-composition-pandt
+spec:
+  coolField: "I'm cool!"
+  authorizedNetworks:
+  - cidrBlock: 1.2.3.4

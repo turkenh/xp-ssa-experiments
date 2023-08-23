@@ -1,0 +1,44 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: xnopresources.nop.example.org
+spec:
+  group: nop.example.org
+  names:
+    kind: XNopResource
+    plural: xnopresources
+  claimNames:
+    kind: NopResource
+    plural: nopresources
+  connectionSecretKeys:
+  - test
+  versions:
+  - name: v1alpha1
+    served: true
+    referenceable: true
+    schema:
+     openAPIV3Schema:
+       type: object
+       properties:
+        spec:
+          type: object
+          properties:
+            coolField:
+              type: string
+            authorizedNetworks:
+              type: array
+              items:
+                type: object
+                description: Authorized networks to connect to Kube API.
+                required:
+                - cidrBlock
+                properties:
+                  cidrBlock:
+                    type: string
+          required:
+          - coolField
+        status:
+          type: object
+          properties:
+            coolerField:
+              type: string
