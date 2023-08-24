@@ -1,0 +1,28 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: xnopresources.nop.example.org
+  labels:
+    semverMinor: v1.x.x
+    semverPatch: v1.22.x
+    semverFull: v1.22.6
+spec:
+  compositeTypeRef:
+    apiVersion: nop.example.org/v1alpha1
+    kind: XNopResource
+  resources:
+  - name: nop-resource-1
+    base:
+      apiVersion: nop.crossplane.io/v1alpha1
+      kind: NopResource
+      spec:
+        forProvider:
+          fields:
+            someField: "someValue"
+          conditionAfter:
+          - conditionType: Ready
+            conditionStatus: "False"
+            time: 0s
+          - conditionType: Ready
+            conditionStatus: "True"
+            time: 10s
